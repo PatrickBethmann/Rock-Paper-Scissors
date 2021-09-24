@@ -1,2 +1,3 @@
-# Rock-Paper-Scissors
-Rock Paper Scissors Game (TOP)
+My own Rock Paper Scissors Game
+
+This Project is done while following the Course at The Odin Project
