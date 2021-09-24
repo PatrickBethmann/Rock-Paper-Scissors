@@ -18,7 +18,7 @@ function computerPlay() {
 }
 // Prompts the player to pick 1, 2 or 3 to choose something
 function makeDecision() {
-    let pick = prompt("Choose\n1. Rock\n2. Paper\n3 Scissors")-1;
+    let pick = prompt("Choose\n1. Rock\n2. Paper\n3. Scissors")-1;
     if(pick === -1) {
         return computerPlay();
     }
