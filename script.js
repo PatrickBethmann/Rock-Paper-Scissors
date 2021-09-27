@@ -1,29 +1,33 @@
-const choices = ['rock', 'paper', 'scissors'];
+const choices = ['rock', 'paper', 'scissor'];
 let playerScore = 0;
 let computerScore = 0;
 
-game();
+// game();
 
+const button_rock = document.querySelector("#rock");
+const button_paper = document.querySelector("#paper");
+const button_scissor = document.querySelector("#scissor"); 
 
-// This functions picks one of the Arrays' choices
-function pickSomething(number) {
-    return choices[number];
-}
+button_rock.addEventListener('click', () => { 
+    updateScore(playRound("rock", computerPlay()))
+    console.log(playerScore + " " + computerScore);
+});
+button_paper.addEventListener('click', () => { 
+    updateScore(playRound("paper", computerPlay()))
+    console.log(playerScore + " " + computerScore);
+});
+button_scissor.addEventListener('click', () => { 
+    updateScore(playRound("scissor", computerPlay()))
+    console.log(playerScore + " " + computerScore);
+});
 
 
 // This fnctions creates a random number for the computer choice and uses "pickSomething()" to select a choice and then returns it
 function computerPlay() { 
     let random = Math.floor(Math.random() * choices.length); // Generates a random number from 0 to choices.length-1 (because the last digit is not included in Math.random)
-    return pickSomething(random); // Returns one of the choices defined in choices :D
+    return choices[random]; // Returns one of the choices defined in choices :D
 }
-// Prompts the player to pick 1, 2 or 3 to choose something
-function makeDecision() {
-    let pick = prompt("Choose\n1. Rock\n2. Paper\n3. Scissors")-1;
-    if(pick === -1) {
-        return computerPlay();
-    }
-    return pickSomething(pick);
-}
+
 // This function checks who has won
 function playRound(playerSelection, computerSelection) {
     if(playerSelection === 'rock') {
@@ -33,10 +37,10 @@ function playRound(playerSelection, computerSelection) {
             return 'draw';
         } else if (computerSelection === 'paper') {
             return 'computer';
-        } else if (computerSelection === 'scissors') {
+        } else if (computerSelection === 'scissor') {
             return 'player';
         } else {
-            return 'Something went wrong with the computerSelection!';
+            return console.log("Something went wrong");
         }
 
         // Player picks Paper
@@ -45,36 +49,33 @@ function playRound(playerSelection, computerSelection) {
             return 'player';
         } else if (computerSelection === 'paper') {
             return 'draw';
-        } else if (computerSelection === 'scissors') {
+        } else if (computerSelection === 'scissor') {
             return 'computer';
         } else {
-            return 'Something went wrong with the computerSelection!';
+            return console.log("Something went wrong");
         }
 
-        // Player picks Scissors
-    } else if (playerSelection === 'scissors') {
+        // Player picks Scissor
+    } else if (playerSelection === 'scissor') {
         if (computerSelection === 'rock') {
             return 'computer';
         } else if (computerSelection === 'paper') {
             return 'player';
-        } else if (computerSelection === 'scissors') {
+        } else if (computerSelection === 'scissor') {
             return 'draw'
         } else {
-            return 'Something went wrong with the computerSelection!';
+            return console.log("Something went wrong");
         }
     } else {
-        return "Something went wrong with the playerSelection!";
+        return console.log("Something went wrong");
     }
-    return 'Somethign went wrong!';
+    return console.log("Something went wrong");
 }
 
 function game() {
     
-
-    for(let round = 1; round <= 5; round++) {
-        updateScore(playRound(makeDecision(), computerPlay()));
-        console.log('Current Score: ' + playerScore +" : " + computerScore);
-    }
+    updateScore(playRound(makeDecision(), computerPlay()));
+    
 
     if(playerScore > computerScore) {
         console.log('YOU WON!');
