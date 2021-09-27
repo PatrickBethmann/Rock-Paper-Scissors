@@ -10,17 +10,33 @@ const button_scissor = document.querySelector("#scissor");
 
 button_rock.addEventListener('click', () => { 
     updateScore(playRound("rock", computerPlay()))
-    console.log(playerScore + " " + computerScore);
+    displayCurrentScore();
 });
 button_paper.addEventListener('click', () => { 
     updateScore(playRound("paper", computerPlay()))
-    console.log(playerScore + " " + computerScore);
+    displayCurrentScore();
 });
 button_scissor.addEventListener('click', () => { 
     updateScore(playRound("scissor", computerPlay()))
-    console.log(playerScore + " " + computerScore);
+    displayCurrentScore();
 });
 
+function displayCurrentScore() {
+    const score = document.querySelector("#score");
+    score.textContent = "Current Score: Player: " + playerScore + " Computer: " + computerScore;
+    if(playerScore >= 5) {
+        score.textContent = "You Won!";
+        resetScore();
+    } else if(computerScore >= 5) {
+        score.textContent = "Computer Won!";
+        resetScore();
+    }
+
+}
+function resetScore() {
+    playerScore = 0;
+    computerScore = 0;
+}
 
 // This fnctions creates a random number for the computer choice and uses "pickSomething()" to select a choice and then returns it
 function computerPlay() { 
@@ -94,6 +110,7 @@ function updateScore(winner) {
     } else if (winner === 'computer') {
         computerScore++;
     } else {
-        return;
+        playerScore++;
+        computerScore++;
     }
 }
